@@ -1,0 +1,54 @@
+package com.cgi.trips.services;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.stereotype.Service;
+
+import com.cgi.trips.dto.FlightDTO;
+import com.cgi.trips.dto.FlightsDTO;
+import com.cgi.trips.dto.ItineraryDTO;
+import com.cgi.trips.model.Flight;
+import com.cgi.trips.model.Itinerary;
+import com.cgi.trips.model.Leg;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+@Service
+public class FlightService implements IFlightService {
+
+	@Override
+	public FlightsDTO getFlightItinerary() {
+		File resource;
+		FlightDTO flightDto = null;
+		Flight flight = null;
+		try {
+			resource = new ClassPathResource("flights.json").getFile();
+			ObjectMapper mapper = new ObjectMapper();
+			ModelMapper modelMapper = new ModelMapper();
+			flight = mapper.readValue(resource, Flight.class);
+			List<ItineraryDTO> itineraries = new ArrayList<>();
+			flightDto = FlightDTO.builder().build();
+			for (Itinerary itinerary : flight.getItineraries()) {
+
+				ItineraryDTO itineraryDto = modelMapper.map(itinerary, ItineraryDTO.class);
+				List<Leg> legs = new ArrayList<>();
+				for (String legId : itinerary.getLegs()) {
+					legs.add(flight.getLegByLegId(legId));
+				}
+				itineraryDto.setLegList(legs);
+				itineraries.add(itineraryDto);
+			}
+
+			flightDto.setItineraries(itineraries);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return FlightsDTO.builder().flight(flightDto).build();
+	}
+
+}
