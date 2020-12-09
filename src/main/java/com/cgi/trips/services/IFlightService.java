@@ -1,9 +1,9 @@
 package com.cgi.trips.services;
 
-import com.cgi.trips.dto.FlightsDTO;
+import com.cgi.trips.dto.FlightDTO;
 
 public interface IFlightService {
 
-	public FlightsDTO getFlightItinerary();
+	public FlightDTO getFlightItinerary();
 
 }

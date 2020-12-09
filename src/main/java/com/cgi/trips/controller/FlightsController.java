@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cgi.trips.dto.FlightDTO;
 import com.cgi.trips.dto.FlightsDTO;
 import com.cgi.trips.services.IFlightService;
 
@@ -19,7 +20,7 @@ public class FlightsController {
 
 	@GetMapping("/")
 	@ApiOperation(value = "get the itinerary of the flights", response = FlightsDTO.class)
-	public FlightsDTO getItinerary() {
+	public FlightDTO getItinerary() {
 		return flightService.getFlightItinerary();
 	}
 

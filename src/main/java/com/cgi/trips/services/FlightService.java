@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import com.cgi.trips.config.Constants;
 import com.cgi.trips.dto.FlightDTO;
-import com.cgi.trips.dto.FlightsDTO;
 import com.cgi.trips.dto.ItineraryDTO;
 import com.cgi.trips.exception.Error;
 import com.cgi.trips.exception.FlightsException;
@@ -28,7 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 public class FlightService implements IFlightService {
 
 	@Override
-	public FlightsDTO getFlightItinerary() {
+	public FlightDTO getFlightItinerary() {
 		File resource;
 		FlightDTO flightDto = null;
 		Flight flight = null;
@@ -63,7 +62,7 @@ public class FlightService implements IFlightService {
 					Error.builder().code(HttpStatus.INTERNAL_SERVER_ERROR).message(Constants.PARSE_ERROR_MSG).build());
 		}
 
-		return FlightsDTO.builder().flight(flightDto).build();
+		return flightDto;
 	}
 
 }

@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.cgi.trips.dto.FlightsDTO;
+import com.cgi.trips.dto.FlightDTO;
 import com.cgi.trips.services.IFlightService;
 
 @ExtendWith(SpringExtension.class)
@@ -22,8 +22,8 @@ class TestFlightService {
 	@Test
 	void testGetFlightItinerary() {
 
-		FlightsDTO flightDto = flightService.getFlightItinerary();
-		assertEquals(7, flightDto.getFlight().getItineraries().size());
+		FlightDTO flightDto = flightService.getFlightItinerary();
+		assertEquals(7, flightDto.getItineraries().size());
 
 	}
 
