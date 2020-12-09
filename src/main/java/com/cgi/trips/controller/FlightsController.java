@@ -1,5 +1,6 @@
 package com.cgi.trips.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,6 +14,7 @@ import io.swagger.annotations.ApiOperation;
 @Api(value = "APIs to peform crud operation on the itinerary")
 public class FlightsController {
 
+	@Autowired
 	private IFlightService flightService;
 
 	@GetMapping("/")
